@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Huete Club</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3/dist/cdn.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            gap: 1rem;
+            padding: 0 1rem;
+            scroll-snap-type: x mandatory;
+        }
+        .carousel-item {
+            scroll-snap-align: start;
+            flex: 0 0 20rem; /* Matches w-80 (320px) */
+        }
+        .section-padding {
+            padding: 3rem 1rem; /* py-12 (3rem) and px-4 (1rem) for mobile */
+        }
+        @keyframes move-logo {
+            0% {
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) scale(1);
+                width: 40vw;
+            }
+            100% {
+                top: 1rem;
+                left: calc(100% - 20vw - 1rem);
+                transform: translate(0, 0) scale(0.5);
+                width: 20vw;
+            }
+        }
+        .animate-move-logo {
+            animation: move-logo 1.5s cubic-bezier(0.4, 0, 0.2, 1) 2s forwards; /* Changed delay from 3s to 2s */
+        }
+        .logo-svg {
+            filter: brightness(0) invert(1); /* Makes SVG white */
+        }
+        @media (max-width: 640px) {
+            .carousel {
+                flex-direction: column; /* Stack videos vertically */
+                overflow-x: hidden; /* Disable horizontal scroll */
+                overflow-y: auto; /* Enable vertical scroll */
+                scroll-snap-type: y mandatory; /* Snap vertically */
+                padding: 1rem 0; /* Vertical padding */
+            }
+            .carousel-item {
+                flex: 0 0 auto; /* Allow natural height */
+                width: 90%; /* Slightly less than full width for padding */
+                max-width: 20rem; /* Keep consistent with desktop */
+            }
+            @keyframes move-logo {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 50vw;
+                }
+                100% {
+                    top: 0.5rem;
+                    left: calc(100% - 20vw - 0.5rem);
+                    transform: translate(0, 0) scale(0.4);
+                    width: 20vw;
+                }
+            }
+        }
+        @media (min-width: 640px) {
+            .section-padding {
+                padding: 3rem 2rem; /* py-12 (3rem) and px-8 (2rem) for larger screens */
+            }
+        }
+        @media (min-width: 1280px) {
+            @keyframes move-logo {
+                0% {
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%) scale(1);
+                    width: 30vw;
+                }
+                100% {
+                    top: 1.5rem;
+                    left: calc(100% - 20vw - 1.5rem);
+                    transform: translate(0, 0) scale(0.667);
+                    width: 20vw;
+                }
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white">
+    <!-- Hero Section -->
+    <section class="h-[95vh] w-full relative overflow-hidden">
+        <img 
+            src="https://i.ibb.co/spk7L88N/hero.jpg" 
+            alt="Hero Background" 
+            class="absolute inset-0 w-full h-full object-cover object-center"
+        >
+        <div class="absolute inset-0 bg-black opacity-30"></div>
+        <img 
+            src="/logo.svg" 
+            alt="Huete Club Logo" 
+            class="absolute z-10 animate-move-logo logo-svg"
+            style="aspect-ratio: 1/1; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 40vw;"
+        >
+    </section>
+
+    <!-- DJ Section -->
+    <section class="section-padding" x-data="youtubeSection('website sessions')">
+        <h2 class="text-3xl font-semibold text-center mb-8">DJ</h2>
+        <div class="carousel">
+            <template x-for="video in videos" :key="video.id">
+                <div class="carousel-item">
+                    <iframe 
+                        :src="'https://www.youtube.com/embed/' + video.id" 
+                        frameborder="0" 
+                        allowfullscreen 
+                        class="w-full h-48 rounded-lg"
+                    ></iframe>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <!-- Music Section -->
+    <section class="section-padding" x-data="youtubeSection('website music')">
+        <h2 class="text-3xl font-semibold text-center mb-8">Music</h2>
+        <div class="carousel">
+            <template x-for="video in videos" :key="video.id">
+                <div class="carousel-item">
+                    <iframe 
+                        :src="'https://www.youtube.com/embed/' + video.id" 
+                        frameborder="0" 
+                        allowfullscreen 
+                        class="w-full h-48 rounded-lg"
+                    ></iframe>
+                </div>
+            </template>
+        </div>
+    </section>
+
+    <!-- Bio Section -->
+    <section class="section-padding flex items-center justify-center min-h-[50vh]">
+        <h2 class="text-3xl font-semibold">Bio</h2>
+    </section>
+
+    <!-- Links Section -->
+    <section class="section-padding" x-data="raindropSection()">
+        <h2 class="text-3xl font-semibold text-center mb-8">Links</h2>
+        <div class="flex flex-wrap justify-center gap-4">
+            <template x-for="link in links" :key="link.id">
+                <a 
+                    :href="link.url" 
+                    target="_blank" 
+                    class="bg-gray-800 hover:bg-gray-700 px-6 py-3 rounded-lg transition"
+                >
+                    <span x-text="link.title"></span>
+                </a>
+            </template>
+        </div>
+    </section>
+
+    <script>
+        async function fetchYouTubeVideos(playlistTitle) {
+            const apiKey = 'AIzaSyAOY3TjCxhbgsrR2OFRL7Qi-DUTfB_wLQs'; // Replace with actual API key from https://console.developers.google.com
+            const channelId = 'UCl2UDPBsKfJxCYQcmbmNfWA'; // Replace with actual channel ID (e.g., UC123abc...)
+            try {
+                // Step 1: Fetch all playlists for the channel
+                const playlistResponse = await fetch(
+                    `https://www.googleapis.com/youtube/v3/playlists?part=snippet&channelId=${channelId}&maxResults=50&key=${apiKey}`
+                );
+                if (!playlistResponse.ok) {
+                    throw new Error(`HTTP error fetching playlists! Status: ${playlistResponse.status}`);
+                }
+                const playlistData = await playlistResponse.json();
+                
+                // Find the playlist with the matching title
+                const targetPlaylist = playlistData.items.find(
+                    item => item.snippet.title.toLowerCase() === playlistTitle.toLowerCase()
+                );
+                if (!targetPlaylist) {
+                    console.warn(`No playlist found with title: ${playlistTitle}`);
+                    return [];
+                }
+                const playlistId = targetPlaylist.id;
+
+                // Step 2: Fetch videos from the matching playlist
+                const videoResponse = await fetch(
+                    `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId=${playlistId}&maxResults=50&key=${apiKey}`
+                );
+                if (!videoResponse.ok) {
+                    throw new Error(`HTTP error fetching playlist videos! Status: ${videoResponse.status}`);
+                }
+                const videoData = await videoResponse.json();
+                return videoData.items.map(item => ({
+                    id: item.snippet.resourceId.videoId,
+                    title: item.snippet.title
+                }));
+            } catch (error) {
+                console.error(`Error fetching YouTube videos for ${playlistTitle}:`, error);
+                return [];
+            }
+        }
+
+        async function fetchRaindropLinks() {
+            const clientId = '690b6dad5378b676eb59e6cd';
+            const clientSecret = 'f34b8f40-d810-40a3-8305-d666cf60520b';
+            const accessToken = 'YOUR_RAINDROP_ACCESS_TOKEN';
+            try {
+                const response = await fetch(
+                    'https://api.raindrop.io/rest/v1/raindrops/0?collection=website',
+                    {
+                        headers: {
+                            'Authorization': `Bearer ${accessToken}`
+                        }
+                    }
+                );
+                const data = await response.json();
+                return data.items.map(item => ({
+                    id: item._id,
+                    title: item.title,
+                    url: item.link
+                }));
+            } catch (error) {
+                console.error('Error fetching Raindrop links:', error);
+                return [];
+            }
+        }
+
+        document.addEventListener('alpine:init', () => {
+            Alpine.data('youtubeSection', (playlistTitle) => ({
+                videos: [],
+                async init() {
+                    this.videos = await fetchYouTubeVideos(playlistTitle);
+                }
+            }));
+
+            Alpine.data('raindropSection', () => ({
+                links: [],
+                async init() {
+                    this.links = await fetchRaindropLinks();
+                }
+            }));
+        });
+    </script>
+</body>
+</html>
