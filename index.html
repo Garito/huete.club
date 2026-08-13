@@ -291,7 +291,7 @@
     </section>
 
     <!-- DJ Section -->
-    <section id="dj" class="section-padding" x-data="youtubeSection('website sessions')">
+    <section id="dj" class="section-padding" x-data="youtubeSection('website sessions')" x-show="videos.length > 0" x-cloak>
         <h2 class="section-title">DJ</h2>
         <div class="carousel">
             <template x-for="video in videos" :key="video.id">
@@ -308,7 +308,7 @@
     </section>
 
     <!-- Music Section -->
-    <section id="music" class="section-padding" x-data="youtubeSection('website music')">
+    <section id="music" class="section-padding" x-data="youtubeSection('website music')" x-show="videos.length > 0" x-cloak>
         <h2 class="section-title">Music</h2>
         <div class="carousel">
             <template x-for="video in videos" :key="video.id">
@@ -325,7 +325,7 @@
     </section>
 
     <!-- Photos Section -->
-    <section id="photos" class="section-padding" x-data="cloudinaryPhotos('website-gallery')">
+    <section id="photos" class="section-padding" x-data="cloudinaryPhotos('website-gallery')" x-show="photos.length > 0" x-cloak>
         <h2 class="section-title">Photos</h2>
         <div class="photo-grid">
             <template x-for="(photo, index) in photos" :key="photo.id">
@@ -378,7 +378,7 @@
     </section>
 
     <!-- Videos Section -->
-    <section id="videos" class="section-padding" x-data="cloudinaryVideos('website-gallery')">
+    <section id="videos" class="section-padding" x-data="cloudinaryVideos('website-gallery')" x-show="videos.length > 0" x-cloak>
         <h2 class="section-title">Videos</h2>
         <div class="video-grid">
             <template x-for="video in videos" :key="video.id">
@@ -415,7 +415,7 @@ Originario de Terrassa (Barcelona).
     </section>
 
     <!-- Links Section -->
-    <section id="links" class="section-padding" x-data="raindropSection()">
+    <section id="links" class="section-padding" x-data="raindropSection()" x-show="links.length > 0" x-cloak>
         <h2 class="section-title">Links</h2>
         <div class="flex flex-wrap justify-center gap-4">
             <template x-for="link in links" :key="link.id">
