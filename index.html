@@ -419,12 +419,16 @@ Originario de Terrassa (Barcelona).
         <h2 class="section-title">Links</h2>
         <div class="flex flex-wrap justify-center gap-4">
             <template x-for="link in links" :key="link.id">
-                <a 
-                    :href="link.url" 
-                    target="_blank" 
-                    class="border border-sand/30 text-sand hover:bg-sand hover:text-ink px-6 py-3 rounded-lg transition-colors"
+                <a
+                    :href="link.url"
+                    target="_blank"
+                    :title="link.title"
+                    :aria-label="link.title"
+                    class="flex items-center justify-center gap-2 text-sand hover:bg-sand hover:text-ink px-6 py-3 rounded-lg transition-colors"
                 >
-                    <span x-text="link.title"></span>
+                    <span x-show="iconUrl(link.url)" class="w-6 h-6 shrink-0 bg-current"
+                          :style="`-webkit-mask:url(${iconUrl(link.url)}) center/contain no-repeat;mask:url(${iconUrl(link.url)}) center/contain no-repeat`"></span>
+                    <span x-show="!iconUrl(link.url)" x-text="link.title"></span>
                 </a>
             </template>
         </div>
@@ -484,12 +488,10 @@ Originario de Terrassa (Barcelona).
         }
 
         async function fetchRaindropLinks() {
-            const clientId = '690b6dad5378b676eb59e6cd';
-            const clientSecret = 'f34b8f40-d810-40a3-8305-d666cf60520b';
-            const accessToken = 'YOUR_RAINDROP_ACCESS_TOKEN';
+            const accessToken = 'f8ec686c-eb53-4247-a1e8-6143735fef32'; // Raindrop test token — public in page, scoped to the "huete.club" collection account
             try {
                 const response = await fetch(
-                    'https://api.raindrop.io/rest/v1/raindrops/0?collection=website',
+                    'https://api.raindrop.io/rest/v1/raindrops/73930135?sort=-sort',
                     {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
@@ -591,6 +593,20 @@ Originario de Terrassa (Barcelona).
                 links: [],
                 async init() {
                     this.links = await fetchRaindropLinks();
+                },
+                iconUrl(url) {
+                    const map = {
+                        'instagram.com': 'instagram', 'open.spotify.com': 'spotify',
+                        'soundcloud.com': 'soundcloud', 'youtube.com': 'youtube', 'youtu.be': 'youtube',
+                        'bandcamp.com': 'bandcamp', 'mixcloud.com': 'mixcloud',
+                        'facebook.com': 'facebook', 'tiktok.com': 'tiktok', 'beatport.com': 'beatport',
+                        'x.com': 'x', 'twitter.com': 'x'
+                    };
+                    try {
+                        const host = new URL(url).hostname.replace(/^www\./, '');
+                        const slug = map[host];
+                        return slug ? `https://cdn.simpleicons.org/${slug}` : null;
+                    } catch { return null; }
                 }
             }));
         });
