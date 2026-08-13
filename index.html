@@ -1,10 +1,53 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="es" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Huete Club</title>
+
+    <title>DJ Huete — Deep House, IDM y electrónica experimental · Terrassa (Barcelona)</title>
+    <meta name="description" content="DJ Huete, DJ y compositor de electrónica experimental desde Terrassa (Barcelona): Deep House de alta calidad, IDM, Ambient y Drum & Bass. Sesiones a cuatro platos, visto en Monegros Desert Festival y Unlimited Festival.">
+    <link rel="canonical" href="https://huete.club/">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Huete Club">
+    <meta property="og:title" content="DJ Huete — Deep House, IDM y electrónica experimental">
+    <meta property="og:description" content="DJ y compositor de electrónica experimental desde Terrassa (Barcelona): Deep House, IDM, Ambient y Drum & Bass.">
+    <meta property="og:url" content="https://huete.club/">
+    <meta property="og:locale" content="es_ES">
+    <meta property="og:image" content="https://huete.club/og-logo.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+
+    <!-- Twitter/X -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="DJ Huete — Deep House, IDM y electrónica experimental">
+    <meta name="twitter:description" content="DJ y compositor de electrónica experimental desde Terrassa (Barcelona).">
+    <meta name="twitter:image" content="https://huete.club/og-logo.png">
+
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
     <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#0c110b">
+
+    <!-- Structured data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "MusicGroup",
+      "name": "DJ Huete",
+      "alternateName": "Huete",
+      "url": "https://huete.club/",
+      "image": "https://huete.club/og-logo.png",
+      "logo": "https://huete.club/logo.svg",
+      "genre": ["Deep House", "IDM", "Ambient", "Drum and Bass", "Experimental Electronic"],
+      "location": {
+        "@type": "Place",
+        "name": "Terrassa, Barcelona, España"
+      },
+      "description": "DJ y compositor de electrónica experimental: Deep House, IDM, Ambient y Drum & Bass."
+    }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -177,7 +220,7 @@
         }
         /* Light-theme component overrides — kept last so nothing above clobbers them */
         @media (prefers-color-scheme: light) {
-            .footer-logo { filter: none; } /* solid-black SVG, dark on light bg */
+            .footer-logo { filter: brightness(0); } /* SVG is white; force black on light bg */
         }
     </style>
 </head>
@@ -216,6 +259,7 @@
 
     <!-- Hero Section -->
     <section class="h-screen w-full relative overflow-hidden">
+        <h1 class="sr-only">DJ Huete — Deep House, IDM y electrónica experimental · Terrassa (Barcelona)</h1>
         <img
             src="https://i.ibb.co/kg2Z3sd2/hero-1280.jpg"
             srcset="
@@ -224,7 +268,7 @@
                 https://i.ibb.co/N6ypSKwG/hero-1920.jpg 1920w
             "
             sizes="100vw"
-            alt="Hero Background"
+            alt=""
             class="absolute inset-0 w-full h-full object-cover object-bottom"
             loading="eager"
             fetchpriority="high"
