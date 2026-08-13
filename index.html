@@ -187,7 +187,7 @@
         }
         .photo-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(1, 1fr);
             gap: 0.75rem;
         }
         .video-grid {
@@ -443,8 +443,8 @@ Originario de Terrassa (Barcelona).
 
     <script>
         async function fetchYouTubeVideos(playlistTitle) {
-            const apiKey = 'AIzaSyAOY3TjCxhbgsrR2OFRL7Qi-DUTfB_wLQs'; // Replace with actual API key from https://console.developers.google.com
-            const channelId = 'UCl2UDPBsKfJxCYQcmbmNfWA'; // Replace with actual channel ID (e.g., UC123abc...)
+            const apiKey = 'AIzaSyCoGQs7M8W5IfQJAnXVK8DIcARRjPc5PPU'; // Huete's YouTube Data API v3 key (referrer-restricted)
+            const channelId = 'UChxkQ1MN-1e_YPKv2ghigXg'; // Huete's YouTube channel (@djhuete6349)
             try {
                 // Step 1: Fetch all playlists for the channel
                 const playlistResponse = await fetch(
