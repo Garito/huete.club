@@ -279,7 +279,7 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="h-screen w-full relative overflow-hidden">
+    <section id="top" class="h-screen w-full relative overflow-hidden">
         <h1 class="sr-only">DJ Huete — Deep House, IDM y electrónica experimental · Terrassa (Barcelona)</h1>
         <img
             src="https://i.ibb.co/kg2Z3sd2/hero-1280.jpg"
@@ -457,12 +457,14 @@ Originario de Terrassa (Barcelona).
 
     <!-- Footer Logo -->
     <section class="section-padding flex flex-col items-center gap-4" style="border-top:1px solid rgb(var(--sand) / .12)">
-        <img
-            src="/logo.svg"
-            alt="Huete Club Logo"
-            class="logo-svg footer-logo"
-            style="aspect-ratio: 1/1;"
-        >
+        <a href="#top" aria-label="Volver arriba">
+            <img
+                src="/logo.svg"
+                alt="Huete Club Logo"
+                class="logo-svg footer-logo"
+                style="aspect-ratio: 1/1;"
+            >
+        </a>
         <p class="text-sage text-sm">© <span x-text="new Date().getFullYear()">2026</span> Huete · Terrassa (Barcelona)</p>
     </section>
 
