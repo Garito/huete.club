@@ -177,7 +177,7 @@
             .logo-position {
                 top: 0.5rem;
                 right: 0.5rem;
-                width: 3.6rem;
+                width: 3rem;
             }
             /* .logo-bg { display: block; } */ /* mobile black backing behind logo — disabled */
             .footer-logo { width: 6rem; } /* double of 3rem */
@@ -628,7 +628,7 @@ Originario de Terrassa (Barcelona).
                     try {
                         const host = new URL(url).hostname.replace(/^www\./, '');
                         const slug = map[host];
-                        return slug ? `https://cdn.simpleicons.org/${slug}` : null;
+                        return slug ? `/icons/${slug}.svg` : null;
                     } catch { return null; }
                 }
             }));
