@@ -136,15 +136,15 @@
             align-items: center;
             gap: 0.25rem;
         }
-        .logo-menu-lines { /* 2-line menu affordance under the logo; white + dark halo for foliage */
-            width: 1.5rem;
+        .logo-menu-dots { /* 3-dot menu affordance under the logo; white + dark halo for foliage */
+            width: 1.4rem;
             height: auto;
             filter: drop-shadow(0 0 2px rgba(0,0,0,.95)) drop-shadow(0 0 4px rgba(0,0,0,.7));
         }
         .logo-position .logo-svg {
             display: block;
             width: 100%;
-            aspect-ratio: 1 / 1; /* logo stays square regardless of the menu lines below it */
+            aspect-ratio: 1 / 1; /* logo stays square regardless of the menu dots below it */
             position: relative;
             z-index: 1; /* logo on top of its black backing */
         }
@@ -309,9 +309,10 @@
         >
             <span x-show="!menuOpen" aria-hidden="true" class="logo-bg"></span>
             <img src="/logo.svg" alt="Huete Club Logo" class="logo-svg">
-            <svg x-show="!menuOpen" aria-hidden="true" class="logo-menu-lines md:hidden" viewBox="0 0 24 12" fill="none" stroke="#fff" stroke-width="1.2" stroke-linecap="round">
-                <line x1="3" y1="4" x2="21" y2="4"></line>
-                <line x1="3" y1="8" x2="21" y2="8"></line>
+            <svg x-show="!menuOpen" aria-hidden="true" class="logo-menu-dots md:hidden" viewBox="0 0 24 6" fill="#fff">
+                <circle cx="4" cy="3" r="2"></circle>
+                <circle cx="12" cy="3" r="2"></circle>
+                <circle cx="20" cy="3" r="2"></circle>
             </svg>
         </span>
         <!-- Scroll Indicator -->
