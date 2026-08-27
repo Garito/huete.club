@@ -214,24 +214,6 @@
         .bounce-arrow {
             animation: bounce-arrow 1.5s ease-in-out infinite;
         }
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(1, 1fr);
-            gap: 0.75rem;
-        }
-        .video-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0.75rem;
-        }
-        @media (min-width: 640px) {
-            .photo-grid { grid-template-columns: repeat(3, 1fr); }
-            .video-grid { grid-template-columns: repeat(3, 1fr); }
-        }
-        @media (min-width: 1024px) {
-            .photo-grid { grid-template-columns: repeat(4, 1fr); }
-            .video-grid { grid-template-columns: repeat(4, 1fr); }
-        }
         .lightbox {
             position: fixed;
             inset: 0;
@@ -316,7 +298,6 @@
         </span>
         <!-- Scroll Indicator -->
         <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-1">
-            <span class="text-sand text-sm tracking-wide">Descubre más</span>
             <svg class="w-5 h-5 text-sand bounce-arrow" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
             </svg>
@@ -360,9 +341,9 @@
     <!-- Photos Section -->
     <section id="photos" class="section-padding" x-data="cloudinaryPhotos('website-gallery')" x-show="photos.length > 0" x-cloak>
         <h2 class="section-title">Photos</h2>
-        <div class="photo-grid">
+        <div class="carousel">
             <template x-for="(photo, index) in photos" :key="photo.id">
-                <div class="aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity" @click="openLightbox(index)">
+                <div class="carousel-item aspect-square overflow-hidden rounded-lg cursor-pointer hover:opacity-80 transition-opacity" @click="openLightbox(index)">
                     <img
                         :src="thumbUrl(photo)"
                         :alt="photo.alt"
@@ -413,9 +394,9 @@
     <!-- Videos Section -->
     <section id="videos" class="section-padding" x-data="cloudinaryVideos('website-gallery')" x-show="videos.length > 0" x-cloak>
         <h2 class="section-title">Videos</h2>
-        <div class="video-grid">
+        <div class="carousel">
             <template x-for="video in videos" :key="video.id">
-                <div>
+                <div class="carousel-item">
                     <video
                         controls
                         preload="metadata"
